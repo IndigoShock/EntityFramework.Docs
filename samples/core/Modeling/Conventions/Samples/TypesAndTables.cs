@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
-namespace EFModeling.Conventions.Samples.IncludedTypes
+namespace EFModeling.Conventions.Samples.TypesAndTables
 {
     class MyContext : DbContext
     {
