@@ -1,14 +1,15 @@
 ---
-title: "Using migrate.exe - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: 989ea862-e936-4c85-926a-8cfbef5df5b8
+title: Using migrate.exe - EF6
+description: Using migrate.exe in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/modeling/code-first/migrations/migrate-exe
 ---
 # Using migrate.exe
 Code First Migrations can be used to update a database from inside visual studio, but can also be executed via the command line tool migrate.exe. This page will give a quick overview on how to use migrate.exe to execute migrations against a database.
 
 > [!NOTE]
-> This article assumes you know how to use Code First Migrations in basic scenarios. If you don’t, then you’ll need to read [Code First Migrations](~/ef6/modeling/code-first/migrations/index.md) before continuing.
+> This article assumes you know how to use Code First Migrations in basic scenarios. If you don’t, then you’ll need to read [Code First Migrations](xref:ef6/modeling/code-first/migrations/index) before continuing.
 
 ## Copy migrate.exe
 
@@ -38,7 +39,7 @@ The above will display the help page associated with this utility, note that you
 ## Migrate to the latest migration
 
 ``` console
-Migrate.exe MyMvcApplication.dll /startupConfigurationFile=”..\\web.config”
+Migrate.exe MyMvcApplication.dll /startupConfigurationFile="..\\web.config"
 ```
 
 When running migrate.exe the only mandatory parameter is the assembly, which is the assembly that contains the migrations that you are trying to run, but it will use all convention based settings if you do not specify the configuration file.
@@ -46,7 +47,7 @@ When running migrate.exe the only mandatory parameter is the assembly, which is 
 ## Migrate to a specific migration
 
 ``` console
-Migrate.exe MyApp.exe /startupConfigurationFile=”MyApp.exe.config” /targetMigration=”AddTitle”
+Migrate.exe MyApp.exe /startupConfigurationFile="MyApp.exe.config" /targetMigration="AddTitle"
 ```
 
 If you want to run migrations up to a specific migration, then you can specify the name of the migration. This will run all previous migrations as required until getting to the migration specified.
@@ -54,7 +55,7 @@ If you want to run migrations up to a specific migration, then you can specify t
 ## Specify working directory
 
 ``` console
-Migrate.exe MyApp.exe /startupConfigurationFile=”MyApp.exe.config” /startupDirectory=”c:\\MyApp”
+Migrate.exe MyApp.exe /startupConfigurationFile="MyApp.exe.config" /startupDirectory="c:\\MyApp"
 ```
 
 If you assembly has dependencies or reads files relative to the working directory then you will need to set startupDirectory.
@@ -62,7 +63,7 @@ If you assembly has dependencies or reads files relative to the working director
 ## Specify migration configuration to use
 
 ``` console
-Migrate.exe MyAssembly CustomConfig /startupConfigurationFile=”..\\web.config”
+Migrate.exe MyAssembly CustomConfig /startupConfigurationFile="..\\web.config"
 ```
 
 If you have multiple migration configuration classes, classes inheriting from DbMigrationConfiguration, then you need to specify which is to be used for this execution. This is specified by providing the optional second parameter without a switch as above.
@@ -70,7 +71,7 @@ If you have multiple migration configuration classes, classes inheriting from Db
 ## Provide connection string
 
 ``` console
-Migrate.exe BlogDemo.dll /connectionString=”Data Source=localhost;Initial Catalog=BlogDemo;Integrated Security=SSPI” /connectionProviderName=”System.Data.SqlClient”
+Migrate.exe BlogDemo.dll /connectionString="Data Source=localhost;Initial Catalog=BlogDemo;Integrated Security=SSPI" /connectionProviderName="System.Data.SqlClient"
 ```
 
 If you wish to specify a connection string at the command line then you must also provide the provider name. Not specifying the provider name will cause an exception.

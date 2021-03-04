@@ -20,7 +20,7 @@ namespace Samples
         public static long InstanceCount;
 
         public BloggingContext(DbContextOptions options)
-            : base(options) 
+            : base(options)
             => Interlocked.Increment(ref InstanceCount);
 
         public DbSet<Blog> Blogs { get; set; }
@@ -65,12 +65,14 @@ namespace Samples
 
             var stopwatch = new Stopwatch();
 
-            MonitorResults(TimeSpan.FromSeconds(Seconds), stopwatch);
+            var monitorTask = MonitorResults(TimeSpan.FromSeconds(Seconds), stopwatch);
 
             await Task.WhenAll(
                 Enumerable
                     .Range(0, Threads)
                     .Select(_ => SimulateRequestsAsync(serviceProvider, stopwatch)));
+
+            await monitorTask;
         }
 
         private static void SetupDatabase(IServiceProvider serviceProvider)

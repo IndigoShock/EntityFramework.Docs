@@ -1,11 +1,12 @@
 ---
-title: "CSDL Specification - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: c54255f4-253f-49eb-bec8-ad7927ac2fa3
+title: CSDL Specification - EF6
+description: CSDL Specification in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/modeling/designer/advanced/edmx/csdl-spec
 ---
 # CSDL Specification
-Conceptual schema definition language (CSDL) is an XML-based language that describes the entities, relationships, and functions that make up a conceptual model of a data-driven application. This conceptual model can be used by the Entity Framework or WCF Data Services. The metadata that is described with CSDL is used by the Entity Framework to map entities and relationships that are defined in a conceptual model to a data source. For more information, see [SSDL Specification](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md) and [MSL Specification](~/ef6/modeling/designer/advanced/edmx/msl-spec.md).
+Conceptual schema definition language (CSDL) is an XML-based language that describes the entities, relationships, and functions that make up a conceptual model of a data-driven application. This conceptual model can be used by the Entity Framework or WCF Data Services. The metadata that is described with CSDL is used by the Entity Framework to map entities and relationships that are defined in a conceptual model to a data source. For more information, see [SSDL Specification](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec) and [MSL Specification](xref:ef6/modeling/designer/advanced/edmx/msl-spec).
 
 CSDL is the Entity Framework's implementation of the Entity Data Model.
 
@@ -17,9 +18,9 @@ Versions of CSDL are differentiated by XML namespaces.
 
 | CSDL Version | XML Namespace                                |
 |:-------------|:---------------------------------------------|
-| CSDL v1      | http://schemas.microsoft.com/ado/2006/04/edm |
-| CSDL v2      | http://schemas.microsoft.com/ado/2008/09/edm |
-| CSDL v3      | http://schemas.microsoft.com/ado/2009/11/edm |
+| CSDL v1      | https://schemas.microsoft.com/ado/2006/04/edm |
+| CSDL v2      | https://schemas.microsoft.com/ado/2008/09/edm |
+| CSDL v3      | https://schemas.microsoft.com/ado/2009/11/edm |
 
  
 ## Association Element (CSDL)
@@ -167,7 +168,7 @@ The following table describes the attributes that can be applied to the **Collec
 | **FixedLength**                                                         | No          | **True** or **False** depending on whether the property value will be stored as a fixed length string.                                                                                                                           |
 | **Precision**                                                           | No          | The precision of the property value.                                                                                                                                                                                             |
 | **Scale**                                                               | No          | The scale of the property value.                                                                                                                                                                                                 |
-| **SRID**                                                                | No          | Spatial System Reference Identifier. Valid only for properties of spatial types.   For more information, see [SRID](http://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx) |
+| **SRID**                                                                | No          | Spatial System Reference Identifier. Valid only for properties of spatial types.   For more information, see [SRID](https://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx) |
 | **Unicode**                                                             | No          | **True** or **False** depending on whether the property value will be stored as a Unicode string.                                                                                                                                |
 | **Collation**                                                           | No          | A string that specifies the collating sequence to be used in the data source.                                                                                                                                                    |
 
@@ -1051,7 +1052,7 @@ The following table describes the attributes that can be applied to the **Parame
 | **MaxLength**  | No          | The maximum allowed length of the parameter.                                                                                                                                                                                    |
 | **Precision**  | No          | The precision of the parameter.                                                                                                                                                                                                 |
 | **Scale**      | No          | The scale of the parameter.                                                                                                                                                                                                     |
-| **SRID**       | No          | Spatial System Reference Identifier. Valid only for parameters of spatial types. For more information, see [SRID](http://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
+| **SRID**       | No          | Spatial System Reference Identifier. Valid only for parameters of spatial types. For more information, see [SRID](https://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 
  
 
@@ -1110,7 +1111,7 @@ The following table describes the attributes that can be applied to the **Parame
 | **FixedLength**  | No          | **True** or **False** depending on whether the property value will be stored as a fixed length string.                                                                                                                          |
 | **Precision**    | No          | The precision of the property value.                                                                                                                                                                                            |
 | **Scale**        | No          | The scale of the property value.                                                                                                                                                                                                |
-| **SRID**         | No          | Spatial System Reference Identifier. Valid only for properties of spatial types. For more information, see [SRID](http://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
+| **SRID**         | No          | Spatial System Reference Identifier. Valid only for properties of spatial types. For more information, see [SRID](https://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 | **Unicode**      | No          | **True** or **False** depending on whether the property value will be stored as a Unicode string.                                                                                                                               |
 | **Collation**    | No          | A string that specifies the collating sequence to be used in the data source.                                                                                                                                                   |
 
@@ -1218,7 +1219,7 @@ The following table describes the attributes that can be applied to the **Proper
 | **FixedLength**                                                        | No          | **True** or **False** depending on whether the property value will be stored as a fixed length string.                                                                                                                          |
 | **Precision**                                                          | No          | The precision of the property value.                                                                                                                                                                                            |
 | **Scale**                                                              | No          | The scale of the property value.                                                                                                                                                                                                |
-| **SRID**                                                               | No          | Spatial System Reference Identifier. Valid only for properties of spatial types. For more information, see [SRID](http://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
+| **SRID**                                                               | No          | Spatial System Reference Identifier. Valid only for properties of spatial types. For more information, see [SRID](https://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 | **Unicode**                                                            | No          | **True** or **False** depending on whether the property value will be stored as a Unicode string.                                                                                                                               |
 | **Collation**                                                          | No          | A string that specifies the collating sequence to be used in the data source.                                                                                                                                                   |
 | **ConcurrencyMode**                                                    | No          | **None** (the default value) or **Fixed**. If the value is set to **Fixed**, the property value will be used in optimistic concurrency checks.                                                                                  |
@@ -1295,7 +1296,7 @@ The following table describes the attributes that can be applied to the **Proper
 | **FixedLength**                                                    | No          | **True** or **False** depending on whether the property value will be stored as a fixed length string.                                                                                                                          |
 | **Precision**                                                      | No          | The precision of the property value.                                                                                                                                                                                            |
 | **Scale**                                                          | No          | The scale of the property value.                                                                                                                                                                                                |
-| **SRID**                                                           | No          | Spatial System Reference Identifier. Valid only for properties of spatial types. For more information, see [SRID](http://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
+| **SRID**                                                           | No          | Spatial System Reference Identifier. Valid only for properties of spatial types. For more information, see [SRID](https://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 | **Unicode**                                                        | No          | **True** or **False** depending on whether the property value will be stored as a Unicode string.                                                                                                                               |
 | **Collation**                                                      | No          | A string that specifies the collating sequence to be used in the data source.                                                                                                                                                   |
 
@@ -1659,7 +1660,7 @@ A **Schema** element may contain zero or one Annotation elements.
 
 The **Schema** element uses the **Namespace** attribute to define the namespace for the entity type, complex type, and association objects in a conceptual model. Within a namespace, no two objects can have the same name. Namespaces can span multiple **Schema** elements and multiple .csdl files.
 
-A conceptual model namespace is different from the XML namespace of the **Schema** element. A conceptual model namespace (as defined by the **Namespace** attribute) is a logical container for entity types, complex types, and association types. The XML namespace (indicated by the **xmlns** attribute) of a **Schema** element is the default namespace for child elements and attributes of the **Schema** element. XML namespaces of the form http://schemas.microsoft.com/ado/YYYY/MM/edm (where YYYY and MM represent a year and month respectively) are reserved for CSDL. Custom elements and attributes cannot be in namespaces that have this form.
+A conceptual model namespace is different from the XML namespace of the **Schema** element. A conceptual model namespace (as defined by the **Namespace** attribute) is a logical container for entity types, complex types, and association types. The XML namespace (indicated by the **xmlns** attribute) of a **Schema** element is the default namespace for child elements and attributes of the **Schema** element. XML namespaces of the form https://schemas.microsoft.com/ado/YYYY/MM/edm (where YYYY and MM represent a year and month respectively) are reserved for CSDL. Custom elements and attributes cannot be in namespaces that have this form.
 
 ### Applicable Attributes
 
@@ -1682,9 +1683,9 @@ The table below describes the attributes can be applied to the **Schema** elemen
 The following example shows a **Schema** element that contains an **EntityContainer** element, two **EntityType** elements, and one **Association** element.
 
 ``` xml
- <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm"
-      xmlns:cg="http://schemas.microsoft.com/ado/2009/11/codegeneration"
-      xmlns:store="http://schemas.microsoft.com/ado/2009/11/edm/EntityStoreSchemaGenerator"
+ <Schema xmlns="https://schemas.microsoft.com/ado/2009/11/edm"
+      xmlns:cg="https://schemas.microsoft.com/ado/2009/11/codegeneration"
+      xmlns:store="https://schemas.microsoft.com/ado/2009/11/edm/EntityStoreSchemaGenerator"
        Namespace="ExampleModel" Alias="Self">
          <EntityContainer Name="ExampleModelContainer">
            <EntitySet Name="Customers"
@@ -1764,7 +1765,7 @@ The following table describes the attributes that can be applied to the **TypeRe
 | **FixedLength**                                                    | No          | **True** or **False** depending on whether the property value will be stored as a fixed length string.                                                                                                                          |
 | **Precision**                                                      | No          | The precision of the property value.                                                                                                                                                                                            |
 | **Scale**                                                          | No          | The scale of the property value.                                                                                                                                                                                                |
-| **SRID**                                                           | No          | Spatial System Reference Identifier. Valid only for properties of spatial types. For more information, see [SRID](http://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
+| **SRID**                                                           | No          | Spatial System Reference Identifier. Valid only for properties of spatial types. For more information, see [SRID](https://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 | **Unicode**                                                        | No          | **True** or **False** depending on whether the property value will be stored as a Unicode string.                                                                                                                               |
 | **Collation**                                                      | No          | A string that specifies the collating sequence to be used in the data source.                                                                                                                                                   |
 
@@ -1831,9 +1832,9 @@ The table below describes the attributes can be applied to the **Using** element
 The following example demonstrates the **Using** element being used to import a namespace that is defined elsewhere. Note that the namespace for the **Schema** element shown is `BooksModel`. The `Address` property on the `Publisher`**EntityType** is a complex type that is defined in the `ExtendedBooksModel` namespace (imported with the **Using** element).
 
 ``` xml
- <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm"
-           xmlns:cg="http://schemas.microsoft.com/ado/2009/11/codegeneration"
-           xmlns:store="http://schemas.microsoft.com/ado/2009/11/edm/EntityStoreSchemaGenerator"
+ <Schema xmlns="https://schemas.microsoft.com/ado/2009/11/edm"
+           xmlns:cg="https://schemas.microsoft.com/ado/2009/11/codegeneration"
+           xmlns:store="https://schemas.microsoft.com/ado/2009/11/edm/EntityStoreSchemaGenerator"
            Namespace="BooksModel" Alias="Self">
 
      <Using Namespace="BooksModel.Extended" Alias="BMExt" />
@@ -1873,8 +1874,8 @@ The following example shows an **EntityType** element with an annotation attribu
 
 ``` xml
  <Schema Namespace="SchoolModel" Alias="Self"
-         xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
-         xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+         xmlns:annotation="https://schemas.microsoft.com/ado/2009/02/edm/annotation"
+         xmlns="https://schemas.microsoft.com/ado/2009/11/edm">
    <EntityContainer Name="SchoolEntities" annotation:LazyLoadingEnabled="true">
      <EntitySet Name="People" EntityType="SchoolModel.Person" />
    </EntityContainer>
@@ -1943,8 +1944,8 @@ The following example shows an **EntityType** element with an annotation element
 
 ``` xml
  <Schema Namespace="SchoolModel" Alias="Self"
-         xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
-         xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+         xmlns:annotation="https://schemas.microsoft.com/ado/2009/02/edm/annotation"
+         xmlns="https://schemas.microsoft.com/ado/2009/11/edm">
    <EntityContainer Name="SchoolEntities" annotation:LazyLoadingEnabled="true">
      <EntitySet Name="People" EntityType="SchoolModel.Person" />
    </EntityContainer>
@@ -2059,11 +2060,11 @@ The following table describes the facets that are supported in CSDL. All facets 
 | **Nullable**        | Specifies whether the property can have a **null** value.                                                                                                                                                                                                     | All **EDMSimpleType** properties                                                                                                                                                                                                                                                                                                                                                     | Yes                              | Yes                 |
 | **Precision**       | For properties of type **Decimal**, specifies the number of digits a property value can have. For properties of type **Time**, **DateTime**, and **DateTimeOffset**, specifies the number of digits for the fractional part of seconds of the property value. | **Edm.DateTime**, **Edm.DateTimeOffset**, **Edm.Decimal**, **Edm.Time**                                                                                                                                                                                                                                                                                                              | Yes                              | No                  |
 | **Scale**           | Specifies the number of digits to the right of the decimal point for the property value.                                                                                                                                                                      | **Edm.Decimal**                                                                                                                                                                                                                                                                                                                                                                      | Yes                              | No                  |
-| **SRID**            | Specifies the Spatial System Reference System ID. For more information, see [SRID](http://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx).                                                              | **Edm.Geography, Edm.GeographyPoint, Edm.GeographyLineString, Edm.GeographyPolygon, Edm.GeographyMultiPoint, Edm.GeographyMultiLineString, Edm.GeographyMultiPolygon, Edm.GeographyCollection, Edm.Geometry, Edm.GeometryPoint, Edm.GeometryLineString, Edm.GeometryPolygon, Edm.GeometryMultiPoint, Edm.GeometryMultiLineString, Edm.GeometryMultiPolygon, Edm.GeometryCollection** | No                               | Yes                 |
+| **SRID**            | Specifies the Spatial System Reference System ID. For more information, see [SRID](https://en.wikipedia.org/wiki/SRID) and [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx).                                                              | **Edm.Geography, Edm.GeographyPoint, Edm.GeographyLineString, Edm.GeographyPolygon, Edm.GeographyMultiPoint, Edm.GeographyMultiLineString, Edm.GeographyMultiPolygon, Edm.GeographyCollection, Edm.Geometry, Edm.GeometryPoint, Edm.GeometryLineString, Edm.GeometryPolygon, Edm.GeometryMultiPoint, Edm.GeometryMultiLineString, Edm.GeometryMultiPolygon, Edm.GeometryCollection** | No                               | Yes                 |
 | **Unicode**         | Indicates whether the property value is stored as Unicode.                                                                                                                                                                                                    | **Edm.String**                                                                                                                                                                                                                                                                                                                                                                       | Yes                              | Yes                 |
 
 >[!NOTE]
-> When generating a database from a conceptual model, the Generate Database Wizard will recognize the value of the **StoreGeneratedPattern** attribute on a **Property** element if it is in the following namespace: http://schemas.microsoft.com/ado/2009/02/edm/annotation. The supported values for the attribute are **Identity** and **Computed**. A value of **Identity** will produce a database column with an identity value that is generated in the database. A value of **Computed** will produce a column with a value that is computed in the database.
+> When generating a database from a conceptual model, the Generate Database Wizard will recognize the value of the **StoreGeneratedPattern** attribute on a **Property** element if it is in the following namespace: https://schemas.microsoft.com/ado/2009/02/edm/annotation. The supported values for the attribute are **Identity** and **Computed**. A value of **Identity** will produce a database column with an identity value that is generated in the database. A value of **Computed** will produce a column with a value that is computed in the database.
 
 ### Example
 
@@ -2077,7 +2078,7 @@ The following example shows facets applied to the properties of an entity type:
    <Property Type="Int32"
              Name="ProductId" Nullable="false"
              a:StoreGeneratedPattern="Identity"
-    xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    xmlns:a="https://schemas.microsoft.com/ado/2009/02/edm/annotation" />
    <Property Type="String"
              Name="ProductName"
              Nullable="false"

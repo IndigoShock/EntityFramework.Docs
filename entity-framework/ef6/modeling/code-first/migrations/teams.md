@@ -1,12 +1,13 @@
 ---
-title: "Code First Migrations in Team Environments - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
+title: Code First Migrations in Team Environments - EF6
+description: Code First Migrations in Team Environments in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/modeling/code-first/migrations/teams
 ---
 # Code First Migrations in Team Environments
 > [!NOTE]
-> This article assumes you know how to use Code First Migrations in basic scenarios. If you don’t, then you’ll need to read [Code First Migrations](~/ef6/modeling/code-first/migrations/index.md) before continuing.
+> This article assumes you know how to use Code First Migrations in basic scenarios. If you don’t, then you’ll need to read [Code First Migrations](xref:ef6/modeling/code-first/migrations/index) before continuing.
 
 ## Grab a coffee, you need to read this whole article
 
@@ -34,11 +35,11 @@ If you'd rather watch a screencast than read this article, the following two vid
 
 ### Video One: "Migrations - Under the Hood"
 
-[This screencast](http://channel9.msdn.com/blogs/ef/migrations-under-the-hood) covers how migrations tracks and uses information about the model to detect model changes.
+[This screencast](https://channel9.msdn.com/blogs/ef/migrations-under-the-hood) covers how migrations tracks and uses information about the model to detect model changes.
 
 ### Video Two: "Migrations - Team Environments"
 
-Building on the concepts from the previous video, [this screencast](http://channel9.msdn.com/blogs/ef/migrations-team-environments) covers the issues that arise in a team environment and how to solve them.
+Building on the concepts from the previous video, [this screencast](https://channel9.msdn.com/blogs/ef/migrations-team-environments) covers the issues that arise in a team environment and how to solve them.
 
 ## Understanding how migrations works
 
@@ -101,11 +102,11 @@ Developer \#1 and developer \#2 now makes some changes to the EF model in their 
 
 It’s a lucky day for Developer \#1 as they happen to submit their changes first. Because no one else has checked in since they synced their repository, they can just submit their changes without performing any merging.
 
-![Submit](~/ef6/media/submit.png)
+![Submit Changes](~/ef6/media/submit.png)
 
 Now it’s time for Developer \#2 to submit. They aren’t so lucky. Because someone else has submitted changes since they synced, they will need to pull down the changes and merge. The source control system will likely be able to automatically merge the changes at the code level since they are very simple. The state of Developer \#2’s local repository after syncing is depicted in the following graphic. 
 
-![Pull](~/ef6/media/pull.png)
+![Pull From Source Control](~/ef6/media/pull.png)
 
 At this stage Developer \#2 can run **Update-Database** which will detect the new **AddRating** migration (which hasn’t been applied to Developer \#2’s database) and apply it. Now the **Rating** column is added to the **Blogs** table and the database is in sync with the model.
 
@@ -136,7 +137,8 @@ The following process can be used for this approach, starting from the time you 
 3.  Run **Update-Database** to apply any new migrations that other developers have checked in.
     **_Note:_** *if you don’t get any warnings from the Update-Database command then there were no new migrations from other developers and there is no need to perform any further merging.*
 4.  Run **Add-Migration &lt;pick\_a\_name&gt; –IgnoreChanges** (for example, **Add-Migration Merge –IgnoreChanges**). This generates a migration with all the metadata (including a snapshot of the current model) but will ignore any changes it detects when comparing the current model to the snapshot in the last migrations (meaning you get a blank **Up** and **Down** method).
-5.  Continue developing, or submit to source control (after running your unit tests of course).
+5.  Run **Update-Database** to re-apply the latest migration with the updated metadata.
+6.  Continue developing, or submit to source control (after running your unit tests of course).
 
 Here is the state of Developer \#2’s local code base after using this approach.
 
@@ -156,7 +158,7 @@ The following process can be used for this approach, starting from the time you 
 2.  Sync with the source control.
 3.  Run **Update-Database** to apply any new migrations that other developers have checked in.
     **_Note:_** *if you don’t get any warnings from the Update-Database command then there were no new migrations from other developers and there is no need to perform any further merging.*
-4.  Run **Update-Database –TargetMigration &lt;second\_last\_migration&gt;** (in the example we’ve been following this would be **Update-Database –TargetMigration AddRating**). This roles the database back to the state of the second last migration – effectively ‘un-applying’ the last migration from the database.
+4.  Run **Update-Database –TargetMigration &lt;second\_last\_migration&gt;** (in the example we’ve been following this would be **Update-Database –TargetMigration AddRating**). This rolls the database back to the state of the second last migration – effectively ‘un-applying’ the last migration from the database.
     **_Note:_** *This step is required to make it safe to edit the metadata of the migration since the metadata is also stored in the \_\_MigrationsHistoryTable of the database. This is why you should only use this option if the last migration is only in your local code base. If other databases had the last migration applied you would also have to roll them back and re-apply the last migration to update the metadata.* 
 5.  Run **Add-Migration &lt;full\_name\_including\_timestamp\_of\_last\_migration**&gt; (in the example we’ve been following this would be something like **Add-Migration 201311062215252\_AddReaders**).
     **_Note:_** *You need to include the timestamp so that migrations knows you want to edit the existing migration rather than scaffolding a new one.*

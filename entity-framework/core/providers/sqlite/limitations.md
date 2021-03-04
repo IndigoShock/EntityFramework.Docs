@@ -1,8 +1,8 @@
 ---
 title: SQLite Database Provider - Limitations - EF Core
-author: rowanmiller
-ms.date: 04/09/2017
-ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
+description: Limitations of the Entity Framework Core SQLite database provider as compared to other providers
+author: bricelam
+ms.date: 09/24/2020
 uid: core/providers/sqlite/limitations
 ---
 # SQLite EF Core Database Provider Limitations
@@ -15,11 +15,10 @@ The common relational library (shared by Entity Framework relational database pr
 
 * Schemas
 * Sequences
-* Computed columns
 
 ## Query limitations
 
-SQLite doesn't natively support the following data types. EF Core can read and write values of these types, and querying for equality (`where e.Property == value`) is also support. Other operations, however, like comparison and ordering will require evaluation on the client.
+SQLite doesn't natively support the following data types. EF Core can read and write values of these types, and querying for equality (`where e.Property == value`) is also supported. Other operations, however, like comparison and ordering will require evaluation on the client.
 
 * DateTimeOffset
 * Decimal
@@ -28,9 +27,9 @@ SQLite doesn't natively support the following data types. EF Core can read and w
 
 Instead of `DateTimeOffset`, we recommend using DateTime values. When handling multiple time zones, we recommend converting the values to UTC before saving and then converting back to the appropriate time zone.
 
-The `Decimal` type provides a high level of precision. If you don't need that level of precision, however, we recommend using double instead. You can use a [value converter](../../modeling/value-conversions.md) to continue using decimal in your classes.
+The `Decimal` type provides a high level of precision. If you don't need that level of precision, however, we recommend using double instead. You can use a [value converter](xref:core/modeling/value-conversions) to continue using decimal in your classes.
 
-``` csharp
+```csharp
 modelBuilder.Entity<MyEntity>()
     .Property(e => e.DecimalProperty)
     .HasConversion<double>();
@@ -40,34 +39,57 @@ modelBuilder.Entity<MyEntity>()
 
 The SQLite database engine does not support a number of schema operations that are supported by the majority of other relational databases. If you attempt to apply one of the unsupported operations to a SQLite database then a `NotSupportedException` will be thrown.
 
-| Operation            | Supported? | Requires version |
-|:---------------------|:-----------|:-----------------|
-| AddColumn            | ✔          | 1.0              |
-| AddForeignKey        | ✗          |                  |
-| AddPrimaryKey        | ✗          |                  |
-| AddUniqueConstraint  | ✗          |                  |
-| AlterColumn          | ✗          |                  |
-| CreateIndex          | ✔          | 1.0              |
-| CreateTable          | ✔          | 1.0              |
-| DropColumn           | ✗          |                  |
-| DropForeignKey       | ✗          |                  |
-| DropIndex            | ✔          | 1.0              |
-| DropPrimaryKey       | ✗          |                  |
-| DropTable            | ✔          | 1.0              |
-| DropUniqueConstraint | ✗          |                  |
-| RenameColumn         | ✔          | 2.2.2            |
-| RenameIndex          | ✔          | 2.1              |
-| RenameTable          | ✔          | 1.0              |
-| EnsureSchema         | ✔ (no-op)  | 2.0              |
-| DropSchema           | ✔ (no-op)  | 2.0              |
-| Insert               | ✔          | 2.0              |
-| Update               | ✔          | 2.0              |
-| Delete               | ✔          | 2.0              |
+A rebuild will be attempted in order to perform certain operations. Rebuilds are only possible for database artifacts that are part of your EF Core model. If a database artifact isn't part of the model--for example, if it was created manually inside a migration--then a `NotSupportedException` is still thrown.
 
-## Migrations limitations workaround
+| Operation            | Supported?  | Requires version |
+|:---------------------|:------------|:-----------------|
+| AddCheckConstraint   | ✔ (rebuild) | 5.0              |
+| AddColumn            | ✔           |                  |
+| AddForeignKey        | ✔ (rebuild) | 5.0              |
+| AddPrimaryKey        | ✔ (rebuild) | 5.0              |
+| AddUniqueConstraint  | ✔ (rebuild) | 5.0              |
+| AlterColumn          | ✔ (rebuild) | 5.0              |
+| CreateIndex          | ✔           |                  |
+| CreateTable          | ✔           |                  |
+| DropCheckConstraint  | ✔ (rebuild) | 5.0              |
+| DropColumn           | ✔ (rebuild) | 5.0              |
+| DropForeignKey       | ✔ (rebuild) | 5.0              |
+| DropIndex            | ✔           |                  |
+| DropPrimaryKey       | ✔ (rebuild) | 5.0              |
+| DropTable            | ✔           |                  |
+| DropUniqueConstraint | ✔ (rebuild) | 5.0              |
+| RenameColumn         | ✔           | 2.2              |
+| RenameIndex          | ✔ (rebuild) |                  |
+| RenameTable          | ✔           |                  |
+| EnsureSchema         | ✔ (no-op)   |                  |
+| DropSchema           | ✔ (no-op)   |                  |
+| Insert               | ✔           |                  |
+| Update               | ✔           |                  |
+| Delete               | ✔           |                  |
 
-You can workaround some of these limitations by manually writing code in your migrations to perform a table rebuild. A table rebuild involves renaming the existing table, creating a new table, copying data to the new table, and dropping the old table. You will need to use the `Sql(string)` method to perform some of these steps.
+### Migrations limitations workaround
 
-See [Making Other Kinds Of Table Schema Changes](http://sqlite.org/lang_altertable.html#otheralter) in the SQLite documentation for more details.
+You can workaround some of these limitations by manually writing code in your migrations to perform a rebuild. Table rebuilds involve creating a new table, copying data to the new table, dropping the old table, renaming the new table. You will need to use the `Sql(string)` method to perform some of these steps.
 
-In the future, EF may support some of these operations by using the table rebuild approach under the covers. You can [track this feature on our GitHub project](https://github.com/aspnet/EntityFrameworkCore/issues/329).
+See [Making Other Kinds Of Table Schema Changes](https://sqlite.org/lang_altertable.html#otheralter) in the SQLite documentation for more details.
+
+### Idempotent script limitations
+
+Unlike other databases, SQLite doesn't include a procedural language. Because of this, there is no way to generate the if-then logic required by the idempotent migration scripts.
+
+If you know the last migration applied to a database, you can generate a script from that migration to the latest migration.
+
+```dotnetcli
+dotnet ef migrations script CurrentMigration
+```
+
+Otherwise, we recommend using `dotnet ef database update` to apply migrations. Starting in EF Core 5.0, you can specify the database file when running the command.
+
+```dotnetcli
+dotnet ef database update --connection "Data Source=My.db"
+```
+
+## See also
+
+* [Microsoft.Data.Sqlite Async Limitations](/dotnet/standard/data/sqlite/async)
+* [Microsoft.Data.Sqlite ADO.NET Limitations](/dotnet/standard/data/sqlite/adonet-limitations)

@@ -1,15 +1,17 @@
 ---
-title: "Handling Concurrency Conflicts - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
+title: Handling Concurrency Conflicts - EF6
+description: Handling Concurrency Conflicts in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/saving/concurrency
 ---
-# Handling Concurrency Conflicts
+# Handling Concurrency Conflicts (EF6)
+
 Optimistic concurrency involves optimistically attempting to save your entity to the database in the hope that the data there has not changed since the entity was loaded. If it turns out that the data has changed then an exception is thrown and you must resolve the conflict before attempting to save again. This topic covers how to handle such exceptions in Entity Framework. The techniques shown in this topic apply equally to models created with Code First and the EF Designer.  
 
 This post is not the appropriate place for a full discussion of optimistic concurrency. The sections below assume some knowledge of concurrency resolution and show patterns for common tasks.  
 
-Many of these patterns make use of the topics discussed in [Working with Property Values](~/ef6/saving/change-tracking/property-values.md).  
+Many of these patterns make use of the topics discussed in [Working with Property Values](xref:ef6/saving/change-tracking/property-values).  
 
 Resolving concurrency issues when you are using independent associations (where the foreign key is not mapped to a property in your entity) is much more difficult than when you are using foreign key associations. Therefore if you are going to do concurrency resolution in your application it is advised that you always map foreign keys into your entities. All the examples below assume that you are using foreign key associations.  
 
@@ -46,7 +48,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-A good way to simulate a concurrency exception is to set a breakpoint on the SaveChanges call and then modify an entity that is being saved in the database using another tool such as SQL Management Studio. You could also insert a line before SaveChanges to update the database directly using SqlCommand. For example:  
+A good way to simulate a concurrency exception is to set a breakpoint on the SaveChanges call and then modify an entity that is being saved in the database using another tool such as SQL Server Management Studio. You could also insert a line before SaveChanges to update the database directly using SqlCommand. For example:  
 
 ``` csharp
 context.Database.SqlCommand(
@@ -57,7 +59,7 @@ The Entries method on DbUpdateConcurrencyException returns the DbEntityEntry ins
 
 ## Resolving optimistic concurrency exceptions as client wins  
 
-The example above that uses Reload is sometimes called database wins or store wins because the values in the entity are overwritten by values from the database. Sometimes you may wish to do the opposite and overwrite the values in the database with the values currently in the entity. This is sometimes called client wins and can be done by getting the current database values and setting them as the original values for the entity. (See [Working with Property Values](~/ef6/saving/change-tracking/property-values.md) for information on current and original values.) For example:  
+The example above that uses Reload is sometimes called database wins or store wins because the values in the entity are overwritten by values from the database. Sometimes you may wish to do the opposite and overwrite the values in the database with the values currently in the entity. This is sometimes called client wins and can be done by getting the current database values and setting them as the original values for the entity. (See [Working with Property Values](xref:ef6/saving/change-tracking/property-values) for information on current and original values.) For example:  
 
 ``` csharp
 using (var context = new BloggingContext())

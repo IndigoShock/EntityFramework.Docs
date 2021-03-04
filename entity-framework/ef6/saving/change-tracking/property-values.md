@@ -1,8 +1,9 @@
 ---
-title: "Working with property values - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
+title: Working with property values - EF6
+description: Working with property values in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/saving/change-tracking/property-values
 ---
 # Working with property values
 For the most part Entity Framework will take care of tracking the state, original values, and current values of the properties of your entity instances. However, there may be some cases - such as disconnected scenarios - where you want to view or manipulate the information EF has about the properties. The techniques shown in this topic apply equally to models created with Code First and the EF Designer.  
@@ -192,7 +193,7 @@ public class BlogDto
 
 Running the code above will print out:  
 
-```  
+```console
 Current values:
 Property Id has value 1
 Property Name has value My Cool Blog
@@ -215,7 +216,7 @@ using (var context = new BloggingContext())
 {
     var blog = context.Blogs.Find(1);
 
-    var newValues = new Dictionary\<string, object>
+    var newValues = new Dictionary<string, object>
     {
         { "Name", "The New ADO.NET Blog" },
         { "Url", "blogs.msdn.com/adonet" },
@@ -243,7 +244,7 @@ using (var context = new BloggingContext())
 {
     var user = context.Users.Find("johndoe1987");
 
-    var newValues = new Dictionary\<string, object>
+    var newValues = new Dictionary<string, object>
     {
         { "Name", "John Doe" },
         { "Location.City", "Redmond" },

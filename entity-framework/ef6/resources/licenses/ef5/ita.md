@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 5 License (ITA)"
-ms.date: "10/23/2016"
-ms.assetid: 9ccb2adc-a631-4cc8-bd77-43abc2e7f812
+title: Entity Framework 5 License (ITA) - EF6
+description: Entity Framework 5 License (ITA)
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 5 License (ITA)
 **CONTRATTO DI LICENZA SUPPLEMENTARE PER IL SOFTWARE MICROSOFT**
@@ -42,4 +43,4 @@ Nelle condizioni di licenza che seguono sono descritte condizioni di utilizzo ag
     -   il codice sia divulgato o distribuito nel formato in codice sorgente;
     -   altri abbiano il diritto di modificarlo.
 
-**2. SERVIZI DI SUPPORTO TECNICO PER IL SUPPLEMENTO.** Microsoft fornisce servizi di supporto tecnico per questo software come descritto all'indirizzo www.support.microsoft.com/common/international.aspx.
+**2. SERVIZI DI SUPPORTO TECNICO PER IL SUPPLEMENTO.** Microsoft fornisce servizi di supporto tecnico per questo software come descritto all'indirizzo https://www.support.microsoft.com/common/international.aspx.

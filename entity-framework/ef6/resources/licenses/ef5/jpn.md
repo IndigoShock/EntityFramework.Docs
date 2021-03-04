@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 5 License (JPN)"
-ms.date: "10/23/2016"
-ms.assetid: 5d1555a3-f3cf-4b25-84fa-a531fda0df0d
+title: Entity Framework 5 License (JPN) - EF6
+description: Entity Framework 5 License (JPN)
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 5 License (JPN)
 **マイクロソフト ソフトウェア 追加ライセンス条項**
@@ -42,4 +43,4 @@ Microsoft Corporation (以下「マイクロソフト」といいます) は、�
     -   コードをソース コード形式で公表または頒布すること
     -   他者が改変を行う権利を有すること
 
-**2. 本追加ソフトウェアのサポート サービス**　マイクロソフトは、本ソフトウェアに対し www.support.microsoft.com/common/international.aspx で説明されるサポート サービスを提供します。
+**2. 本追加ソフトウェアのサポート サービス**　マイクロソフトは、本ソフトウェアに対し https://www.support.microsoft.com/common/international.aspx で説明されるサポート サービスを提供します。

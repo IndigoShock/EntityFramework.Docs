@@ -1,8 +1,9 @@
 ---
-title: "MSL Specification - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
+title: MSL Specification - EF6
+description: MSL Specification in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/modeling/designer/advanced/edmx/msl-spec
 ---
 # MSL Specification
 Mapping specification language (MSL) is an XML-based language that describes the mapping between the conceptual model and storage model of an Entity Framework application.
@@ -11,15 +12,15 @@ In an Entity Framework application, mapping metadata is loaded from an .msl file
 
 The Entity Framework Designer (EF Designer) stores mapping information in an .edmx file at design time. At build time, the Entity Designer uses information in an .edmx file to create the .msl file that is needed by Entity Framework at runtime
 
-Names of all conceptual or storage model types that are referenced in MSL must be qualified by their respective namespace names. For information about the conceptual model namespace name, see [CSDL Specification](~/ef6/modeling/designer/advanced/edmx/csdl-spec.md). For information about the storage model namespace name, see [SSDL Specification](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md).
+Names of all conceptual or storage model types that are referenced in MSL must be qualified by their respective namespace names. For information about the conceptual model namespace name, see [CSDL Specification](xref:ef6/modeling/designer/advanced/edmx/csdl-spec). For information about the storage model namespace name, see [SSDL Specification](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec).
 
 Versions of MSL are differentiated by XML namespaces.
 
 | MSL Version | XML Namespace                                        |
 |:------------|:-----------------------------------------------------|
 | MSL v1      | urn:schemas-microsoft-com:windows:storage:mapping:CS |
-| MSL v2      | http://schemas.microsoft.com/ado/2008/09/mapping/cs  |
-| MSL v3      | http://schemas.microsoft.com/ado/2009/11/mapping/cs  |
+| MSL v2      | https://schemas.microsoft.com/ado/2008/09/mapping/cs |
+| MSL v3      | https://schemas.microsoft.com/ado/2009/11/mapping/cs  |
 
 ## Alias Element (MSL)
 
@@ -42,7 +43,7 @@ The following example shows an **Alias** element that defines an alias, `c`, for
 
 ``` xml
  <Mapping Space="C-S"
-          xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+          xmlns="https://schemas.microsoft.com/ado/2009/11/mapping/cs">
    <Alias Key="c" Value="SchoolModel"/>
    <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
                            CdmEntityContainer="SchoolModelEntities">
@@ -976,7 +977,7 @@ The following example is based on the School model and shows the **InsertFunctio
 
 The **Mapping** element in mapping specification language (MSL) contains information for mapping objects that are defined in a conceptual model to a database (as described in a storage model). For more information, see CSDL Specification and SSDL Specification.
 
-The **Mapping** element is the root element for a mapping specification. The XML namespace for mapping specifications is http://schemas.microsoft.com/ado/2009/11/mapping/cs.
+The **Mapping** element is the root element for a mapping specification. The XML namespace for mapping specifications is https://schemas.microsoft.com/ado/2009/11/mapping/cs.
 
 The mapping element can have the following child elements (in the order listed):
 
@@ -999,7 +1000,7 @@ The following example shows a **Mapping** element that is based on part of the S
 
 ``` xml
  <Mapping Space="C-S"
-          xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+          xmlns="https://schemas.microsoft.com/ado/2009/11/mapping/cs">
    <Alias Key="c" Value="SchoolModel"/>
    <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
                            CdmEntityContainer="SchoolModelEntities">

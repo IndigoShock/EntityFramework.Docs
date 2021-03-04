@@ -1,204 +1,152 @@
 ---
-title: Migrations - EF Core
+title: Migrations Overview - EF Core
+description: Overview of using migrations to manage database schemas with Entity Framework Core
 author: bricelam
-ms.author: bricelam
-ms.date: 10/05/2018
+ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
 ---
-Migrations
-==========
+# Migrations Overview
 
-A data model changes during development and gets out of sync with the database. You can drop the database and let EF create a new one that matches the model, but this procedure results in the loss of data. The migrations feature in EF Core provides a way to incrementally update the database schema to keep it in sync with the application's data model while preserving existing data in the database.
+In real world projects, data models change as features get implemented: new entities or properties are added and removed, and database schemas needs to be changed accordingly to be kept in sync with the application. The migrations feature in EF Core provides a way to incrementally update the database schema to keep it in sync with the application's data model while preserving existing data in the database.
 
-Migrations includes command-line tools and APIs that help with the following tasks:
+At a high level, migrations function in the following way:
 
-* [Create a migration](#create-a-migration). Generate code that can update the database to sync it with a set of model changes.
-* [Update the database](#update-the-database). Apply pending migrations to update the database schema.
-* [Customize migration code](#customize-migration-code). Sometimes the generated code needs to be modified or supplemented.
-* [Remove a migration](#remove-a-migration). Delete the generated code.
-* [Revert a migration](#revert-a-migration). Undo the database changes.
-* [Generate SQL scripts](#generate-sql-scripts). You might need a script to update a production database or to troubleshoot migration code.
-* [Apply migrations at runtime](#apply-migrations-at-runtime). When design-time updates and running scripts aren't the best options, call the `Migrate()` method.
+* When a data model change is introduced, the developer uses EF Core tools to add a corresponding migration describing the updates necessary to keep the database schema in sync. EF Core compares the current model against a snapshot of the old model to determine the differences, and generates migration source files; the files can be tracked in your project's source control like any other source file.
+* Once a new migration has been generated, it can be applied to a database in various ways. EF Core records all applied migrations in a special history table, allowing it to know which migrations have been applied and which haven't.
 
-Install the tools
------------------
+The rest of this page is a step-by-step beginner's guide for using migrations. Consult the other pages in this section for more in-depth information.
 
-Install the [command-line tools](xref:core/miscellaneous/cli/index):
-* For Visual Studio, we recommend the [Package Manager Console tools](xref:core/miscellaneous/cli/powershell).
-* For other development environments, choose the [.NET Core CLI tools](xref:core/miscellaneous/cli/dotnet).
+## Getting started
 
-Create a migration
-------------------
+Let's assume you've just completed your first EF Core application, which contains the following simple model:
 
-After you've [defined your initial model](xref:core/modeling/index), it's time to create the database. To add an initial migration, run the following command.
-
-``` powershell
-Add-Migration InitialCreate
+```csharp
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
 ```
-``` Console
+
+During development, you may have used the [Create and Drop APIs](xref:core/managing-schemas/ensure-created) to iterate quickly, changing your model as needed; but now that your application is going to production, you need a way to safely evolve the schema without dropping the entire database.
+
+### Install the tools
+
+First, you'll have to install the [EF Core command-line tools](xref:core/cli/index):
+
+* We generally recommend using the [.NET Core CLI tools](xref:core/cli/dotnet), which work on all platforms.
+* If you're more comfortable working inside Visual Studio or have experience with EF6 migrations, you can also use the [Package Manager Console tools](xref:core/cli/powershell).
+
+### Create your first migration
+
+You're now ready to add your first migration! Instruct EF Core to create a migration named **InitialCreate**:
+
+#### [.NET Core CLI](#tab/dotnet-core-cli)
+
+```dotnetcli
 dotnet ef migrations add InitialCreate
 ```
 
-Three files are added to your project under the **Migrations** directory:
+#### [Visual Studio](#tab/vs)
 
-* **XXXXXXXXXXXXXX_InitialCreate.cs**--The main migrations file. Contains the operations necessary to apply the
-  migration (in `Up()`) and to revert it (in `Down()`).
-* **XXXXXXXXXXXXXX_InitialCreate.Designer.cs**--The migrations metadata file. Contains information used by EF.
-* **MyContextModelSnapshot.cs**--A snapshot of your current model. Used to determine what changed when adding the next
-  migration.
-
-The timestamp in the filename helps keep them ordered chronologically so you can see the progression of changes.
-
-> [!TIP]
-> You are free to move Migrations files and change their namespace. New migrations are created as siblings of the last
-> migration.
-
-Update the database
--------------------
-
-Next, apply the migration to the database to create the schema.
-
-``` powershell
-Update-Database
+```powershell
+Add-Migration InitialCreate
 ```
-``` Console
+
+***
+
+EF Core will create a directory called **Migrations** in your project, and generate some files. It's a good idea to inspect what exactly EF Core generated - and possibly amend it - but we'll skip over that for now.
+
+### Create your database and schema
+
+At this point you can have EF create your database and create your schema from the migration. This can be done via the following:
+
+#### [.NET Core CLI](#tab/dotnet-core-cli)
+
+```dotnetcli
 dotnet ef database update
 ```
 
-Customize migration code
-------------------------
+#### [Visual Studio](#tab/vs)
 
-After making changes to your EF Core model, the database schema might be out of sync. To bring it up to date, add another migration. The migration name can be used like a commit message in a version control system. For example, you might choose a name like *AddProductReviews* if the change is a new entity class for reviews.
-
-``` powershell
-Add-Migration AddProductReviews
-```
-``` Console
-dotnet ef migrations add AddProductReviews
-```
-
-Once the migration is scaffolded (code generated for it), review the code for accuracy and add, remove or modify any operations required to apply it correctly.
-
-For example, a migration might contain the following operations:
-
-``` csharp
-migrationBuilder.DropColumn(
-    name: "FirstName",
-    table: "Customer");
-
-migrationBuilder.DropColumn(
-    name: "LastName",
-    table: "Customer");
-
-migrationBuilder.AddColumn<string>(
-    name: "Name",
-    table: "Customer",
-    nullable: true);
-```
-
-While these operations make the database schema compatible, they don't preserve the existing customer names. To make it better, rewrite it as follows.
-
-``` csharp
-migrationBuilder.AddColumn<string>(
-    name: "Name",
-    table: "Customer",
-    nullable: true);
-
-migrationBuilder.Sql(
-@"
-    UPDATE Customer
-    SET Name = FirstName + ' ' + LastName;
-");
-
-migrationBuilder.DropColumn(
-    name: "FirstName",
-    table: "Customer");
-
-migrationBuilder.DropColumn(
-    name: "LastName",
-    table: "Customer");
-```
-
-> [!TIP]
-> The migration scaffolding process warns when an operation might result in data loss (like dropping a column). If you see that warning, be especially sure to review the migrations code for accuracy.
-
-Apply the migration to the database using the appropriate command.
-
-``` powershell
+```powershell
 Update-Database
 ```
-``` Console
+
+***
+
+That's all there is to it - your application is ready to run on your new database, and you didn't need to write a single line of SQL. Note that this way of applying migrations is ideal for local development, but is less suitable for production environments - see the [Applying Migrations page](xref:core/managing-schemas/migrations/applying) for more info.
+
+### Evolving your model
+
+A few days have passed, and you're asked to add a creation timestamp to your blogs. You've done the necessary changes to your application, and your model now looks like this:
+
+```csharp
+public class Blog
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public DateTime CreatedTimestamp { get; set; }
+}
+```
+
+Your model and your production database are now out of sync - we must add a new column to your database schema. Let's create a new migration for this:
+
+#### [.NET Core CLI](#tab/dotnet-core-cli)
+
+```dotnetcli
+dotnet ef migrations add AddBlogCreatedTimestamp
+```
+
+#### [Visual Studio](#tab/vs)
+
+```powershell
+Add-Migration AddBlogCreatedTimestamp
+```
+
+***
+
+Note that we give migrations a descriptive name, to make it easier to understand the project history later.
+
+Since this isn't the project's first migration, EF Core now compares your updated model against a snapshot of the old model, before the column was added; the model snapshot is one of the files generated by EF Core when you add a migration, and is checked into source control. Based on that comparison, EF Core detects that a column has been added, and adds the appropriate migration.
+
+You can now apply your migration as before:
+
+<!--markdownlint-disable MD024-->
+
+#### [.NET Core CLI](#tab/dotnet-core-cli)
+
+```dotnetcli
 dotnet ef database update
 ```
 
-### Empty migrations
+#### [Visual Studio](#tab/vs)
 
-Sometimes it's useful to add a migration without making any model changes. In this case, adding a new migration creates code files with empty classes. You can customize this migration to perform operations that don't directly relate to the EF Core model. Some things you might want to manage this way are:
-
-* Full-Text Search
-* Functions
-* Stored procedures
-* Triggers
-* Views
-
-Remove a migration
-------------------
-Sometimes you add a migration and realize you need to make additional changes to your EF Core model before applying it. To remove the last migration, use this command.
-
-``` powershell
-Remove-Migration
-```
-``` Console
-dotnet ef migrations remove
+```powershell
+Update-Database
 ```
 
-After removing the migration, you can make the additional model changes and add it again.
+<!--markdownlint-enable MD024-->
 
-Revert a migration
-------------------
-If you already applied a migration (or several migrations) to the database but need to revert it, you can use the same command to apply migrations, but specify the name of the migration you want to roll back to.
+***
 
-``` powershell
-Update-Database LastGoodMigration
-```
-``` Console
-dotnet ef database update LastGoodMigration
-```
+Note that this time, EF detects that the database already exists. In addition, when our first migration was applied above, this fact was recorded in a special migrations history table in your database; this allows EF to automatically apply only the new migration.
 
-Generate SQL scripts
---------------------
-When debugging your migrations or deploying them to a production database, it's useful to generate a SQL script. The script can then be further reviewed for accuracy and tuned to fit the needs of a production database. The script can also be used in conjunction with a deployment technology. The basic command is as follows.
+### Excluding parts of your model
 
-``` powershell
-Script-Migration
-```
-``` Console
-dotnet ef migrations script
-```
+> [!NOTE]
+> This feature was introduced EF in Core 5.0.
 
-There are several options to this command.
+Sometimes you may want to reference types from another DbContext. This can lead to migration conflicts. To prevent this, exclude the type from the migrations of one of the DbContexts.
 
-The **from** migration should be the last migration applied to the database before running the script. If no migrations have been applied, specify `0` (this is the default).
+[!code-csharp[](../../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs#TableExcludeFromMigrations)]
 
-The **to** migration is the last migration that will be applied to the database after running the script. This defaults to the last migration in your project.
+### Next steps
 
-An **idempotent** script can optionally be generated. This script only applies migrations if they haven't already been applied to the database. This is useful if you don't exactly know what the last migration applied to the database was or if you are deploying to multiple databases that may each be at a different migration.
+The above was only a brief introduction to migrations. Please consult the other documentation pages to learn more about [managing migrations](xref:core/managing-schemas/migrations/managing), [applying them](xref:core/managing-schemas/migrations/applying), and other aspects. The [.NET Core CLI tool reference](xref:core/cli/index) also contains useful information on the different commands
 
-Apply migrations at runtime
----------------------------
-Some apps may want to apply migrations at runtime during startup or first run. Do this using the `Migrate()` method.
+## Additional resources
 
-This method builds on top of the `IMigrator` service, which can be used for more advanced scenarios. Use `myDbContext.GetInfrastructure().GetService<IMigrator>()` to access it.
-
-``` csharp
-myDbContext.Database.Migrate();
-```
-
-> [!WARNING]
-> * This approach isn't for everyone. While it's great for apps with a local database, most applications will require more robust deployment strategy like generating SQL scripts.
-> * Don't call `EnsureCreated()` before `Migrate()`. `EnsureCreated()` bypasses Migrations to create the schema, which causes `Migrate()` to fail.
-
-Next steps
-----------
-
-For more information, see <xref:core/miscellaneous/cli/index>.
+* [Entity Framework Core tools reference - .NET Core CLI](/ef/core/cli/dotnet) : Includes commands to update, drop, add, remove, and  more.
+* [Entity Framework Core tools reference - Package Manager Console in Visual Studio](https://docs.microsoft.com/en-us/ef/core/cli/powershell) : Includes commands to update, drop, add, remove, and  more.
+* [EF Core Community Standup session](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) going over new migration features in EF Core 5.0.

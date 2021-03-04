@@ -1,8 +1,8 @@
 ---
-title: Porting from EF6 to EF Core - Porting an EDMX-Based Model
-author: rowanmiller
+title: Porting from EF6 to EF Core - Porting an EDMX-Based Model - EF
+description: Specific information on porting an Entity Framework 6 EDMX-based model application to Entity Framework Core
+author: ajcvickers
 ms.date: 10/27/2016
-ms.assetid: 63003709-f1ec-4bdc-8083-65a60c4826d2
 uid: efcore-and-ef6/porting/port-edmx
 ---
 # Porting an EF6 EDMX-Based Model to EF Core
@@ -17,15 +17,15 @@ Install the `Microsoft.EntityFrameworkCore.Tools` NuGet package.
 
 You can now use the reverse engineer functionality to create a model based on your existing database.
 
-Run the following command in Package Manager Console (Tools –> NuGet Package Manager –> Package Manager Console). See [Package Manager Console (Visual Studio)](../../core/miscellaneous/cli/powershell.md) for command options to scaffold a subset of tables etc.
+Run the following command in Package Manager Console (Tools –> NuGet Package Manager –> Package Manager Console). See [Package Manager Console (Visual Studio)](xref:core/cli/powershell) for command options to scaffold a subset of tables etc.
 
-``` powershell
+```powershell
 Scaffold-DbContext "<connection string>" <database provider name>
 ```
 
 For example, here is the command to scaffold a model from the Blogging database on your SQL Server LocalDB instance.
 
-``` powershell
+```powershell
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
 ```
 
@@ -42,6 +42,3 @@ At this point, it's a matter of addressing compilation errors and reviewing code
 ## Test the port
 
 Just because your application compiles, does not mean it is successfully ported to EF Core. You will need to test all areas of your application to ensure that none of the behavior changes have adversely impacted your application.
-
-> [!TIP]
-> See [Getting Started with EF Core on ASP.NET Core with an Existing Database](xref:core/get-started/aspnetcore/existing-db) for an additional reference on how to work with an existing database, 

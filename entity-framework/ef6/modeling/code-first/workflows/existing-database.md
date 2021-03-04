@@ -1,20 +1,21 @@
 ---
-title: "Code First to an Existing Database - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
+title: Code First to an Existing Database - EF6
+description: Code First to an Existing Database in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/modeling/code-first/workflows/existing-database
 ---
 # Code First to an Existing Database
 This video and step-by-step walkthrough provide an introduction to Code First development targeting an existing database. Code First allows you to define your model using C\# or VB.Net classes. Optionally additional configuration can be performed using attributes on your classes and properties or by using a fluent API.
 
 ## Watch the video
-This video is [now available on Channel 9](http://channel9.msdn.com/blogs/ef/code-first-to-existing-database-ef6-1-onwards-).
+This video is [now available on Channel 9](https://channel9.msdn.com/blogs/ef/code-first-to-existing-database-ef6-1-onwards-).
 
 ## Pre-Requisites
 
 You will need to have **Visual Studio 2012** or **Visual Studio 2013** installed to complete this walkthrough.
 
-You will also need version **6.1** (or later) of the **Entity Framework Tools for Visual Studio** installed. See [Get Entity Framework](~/ef6/fundamentals/install.md) for information on installing the latest version of the Entity Framework Tools.
+You will also need version **6.1** (or later) of the **Entity Framework Tools for Visual Studio** installed. See [Get Entity Framework](xref:ef6/fundamentals/install) for information on installing the latest version of the Entity Framework Tools.
 
 ## 1. Create an Existing Database
 
@@ -66,7 +67,7 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 
 ## 2. Create the Application
 
-To keep things simple we’re going to build a basic console application that uses Code First to perform data access:
+To keep things simple we will build a basic console application that uses Code First to do the data access:
 
 -   Open Visual Studio
 -   **File -&gt; New -&gt; Project…**
@@ -78,7 +79,7 @@ To keep things simple we’re going to build a basic console application that us
 
 ## 3. Reverse Engineer Model
 
-We’re going to make use of the Entity Framework Tools for Visual Studio to help us generate some initial code to map to the database. These tools are just generating code that you could also type by hand if you prefer.
+We will use the Entity Framework Tools for Visual Studio to help us generate some initial code to map to the database. These tools are just generating code that you could also type by hand if you prefer.
 
 -   **Project -&gt; Add New Item…**
 -   Select **Data** from the left menu and then **ADO.NET Entity Data Model**
@@ -198,9 +199,9 @@ class Program
 }
 ```
 
-You can now run the application and test it out.
+You can now run the application and test it.
 
-```
+```console
 Enter a name for a new Blog: ADO.NET Blog
 All blogs in the database:
 .NET Framework Blog
@@ -215,7 +216,7 @@ The Code First to Database wizard is designed to generate a starting point set o
 
 ## Using Code First Migrations to an Existing Database
 
-If you want to use Code First Migrations with an existing database, see [Code First Migrations to an existing database](~/ef6/modeling/code-first/migrations/existing-database.md).
+If you want to use Code First Migrations with an existing database, see [Code First Migrations to an existing database](xref:ef6/modeling/code-first/migrations/existing-database).
 
 ## Summary
 

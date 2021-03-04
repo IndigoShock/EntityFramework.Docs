@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFModeling.Samples.DataSeeding
+namespace EFModeling.DataSeeding
 {
-    static class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             #region CustomSeeding
             using (var context = new DataSeedingContext())
@@ -18,6 +18,7 @@ namespace EFModeling.Samples.DataSeeding
                 {
                     context.Blogs.Add(new Blog { Url = "http://test.com" });
                 }
+
                 context.SaveChanges();
             }
             #endregion

@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 6 Runtime Alpha License"
-ms.date: "10/23/2016"
-ms.assetid: bca98fb3-ebb2-4df3-afc8-6fd8f7341c9d
+title: Entity Framework 6 Runtime Alpha License - EF6
+description: Entity Framework 6 Runtime Alpha License
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 6 Runtime Alpha License (ENU)
 **MICROSOFT PRE-RELEASE SOFTWARE LICENSE TERMS**

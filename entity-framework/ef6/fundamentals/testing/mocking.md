@@ -1,8 +1,9 @@
 ---
-title: "Testing with a mocking framework - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
+title: Testing with a mocking framework - EF6
+description: Testing with a mocking framework in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/fundamentals/testing/mocking
 ---
 # Testing with a mocking framework
 > [!NOTE]
@@ -17,13 +18,13 @@ There are two different approaches that can be used to create an in-memory versi
 - **Create your own test doubles** – This approach involves writing your own in-memory implementation of your context and DbSets. This gives you a lot of control over how the classes behave but can involve writing and owning a reasonable amount of code.  
 - **Use a mocking framework to create test doubles** – Using a mocking framework (such as Moq) you can have the in-memory implementations of your context and sets created dynamically at runtime for you.  
 
-This article will deal with using a mocking framework. For creating your own test doubles see [Testing with Your Own Test Doubles](writing-test-doubles.md).  
+This article will deal with using a mocking framework. For creating your own test doubles see [Testing with Your Own Test Doubles](xref:ef6/fundamentals/testing/writing-test-doubles).  
 
-To demonstrate using EF with a mocking framework we are going to use Moq. The easiest way to get Moq is to install the [Moq package from NuGet](http://nuget.org/packages/Moq/).  
+To demonstrate using EF with a mocking framework we are going to use Moq. The easiest way to get Moq is to install the [Moq package from NuGet](https://nuget.org/packages/Moq/).  
 
 ## Testing with pre-EF6 versions  
 
-The scenario shown in this article is dependent on some changes we made to DbSet in EF6. For testing with EF5 and earlier version see [Testing with a Fake Context](http://romiller.com/2012/02/14/testing-with-a-fake-dbcontext/).  
+The scenario shown in this article is dependent on some changes we made to DbSet in EF6. For testing with EF5 and earlier version see [Testing with a Fake Context](https://romiller.com/2012/02/14/testing-with-a-fake-dbcontext/).  
 
 ## Limitations of EF in-memory test doubles  
 

@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 6 Runtime License (CHT)"
-ms.date: "10/23/2016"
-ms.assetid: 88468c89-2a84-4c5b-a8d3-5e1d2bd0b457
+title: Entity Framework 6 Runtime License (CHT) - EF6
+description: Entity Framework 6 Runtime License (CHT)
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 6 Runtime License (CHT)
 **MICROSOFT 軟體授權條款**

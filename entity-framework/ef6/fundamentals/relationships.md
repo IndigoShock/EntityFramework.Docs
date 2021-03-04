@@ -1,11 +1,13 @@
 ---
-title: "Relationships, navigation properties and foreign keys - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
+title: Relationships, navigation properties, and foreign keys - EF6
+description: Relationships, navigation properties, and foreign keys in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/fundamentals/relationships
 ---
-# Relationships, navigation properties and foreign keys
-This topic gives an overview of how Entity Framework manages relationships between entities. It also gives some guidance on how to map and manipulate relationships.
+# Relationships, navigation properties, and foreign keys
+
+This article gives an overview of how Entity Framework manages relationships between entities. It also gives some guidance on how to map and manipulate relationships.
 
 ## Relationships in EF
 
@@ -25,7 +27,7 @@ When foreign key columns are not included in the model, the association informat
 
 You can choose to use one or both types of associations in your model. However, if you have a pure many-to-many relationship that is connected by a join table that contains only foreign keys, the EF will use an independent association to manage such many-to-many relationship.   
 
-The following image shows a conceptual model that was created with the Entity Framework Designer. The model contains two entities that participate in one-to-many relationship. Both entities have navigation properties. **Course** is the depend entity and has the **DepartmentID** foreign key property defined.
+The following image shows a conceptual model that was created with the Entity Framework Designer. The model contains two entities that participate in one-to-many relationship. Both entities have navigation properties. **Course** is the dependent entity and has the **DepartmentID** foreign key property defined.
 
 ![Department and Course tables with navigation properties](~/ef6/media/relationshipefdesigner.png)
 
@@ -60,8 +62,8 @@ public class Department
 
 The rest of this page covers how to access and manipulate data using relationships. For information on setting up relationships in your model, see the following pages.
 
--   To configure relationships in Code First, see [Data Annotations](~/ef6/modeling/code-first/data-annotations.md) and [Fluent API – Relationships](~/ef6/modeling/code-first/fluent/relationships.md).
--   To configure relationships using the Entity Framework Designer, see [Relationships with the EF Designer](~/ef6/modeling/designer/relationships.md).
+-   To configure relationships in Code First, see [Data Annotations](xref:ef6/modeling/code-first/data-annotations) and [Fluent API – Relationships](xref:ef6/modeling/code-first/fluent/relationships).
+-   To configure relationships using the Entity Framework Designer, see [Relationships with the EF Designer](xref:ef6/modeling/designer/relationships).
 
 ## Creating and modifying relationships
 
@@ -122,9 +124,9 @@ In the following example, there is a many-to-many relationship between Instructo
 
 ## Synchronizing the changes between the foreign keys and navigation properties
 
-When you change the relationship of the objects attached to the context by using one of the methods described above, Entity Framework needs to keep foreign keys, references, and collections in sync. Entity Framework automatically manages this synchronization (also known as relationship fix-up) for the POCO entities with proxies. For more information, see [Working with Proxies](~/ef6/fundamentals/proxies.md).
+When you change the relationship of the objects attached to the context by using one of the methods described above, Entity Framework needs to keep foreign keys, references, and collections in sync. Entity Framework automatically manages this synchronization (also known as relationship fix-up) for the POCO entities with proxies. For more information, see [Working with Proxies](xref:ef6/fundamentals/proxies).
 
-If you are using POCO entities without proxies, you must make sure that the **DetectChanges** method is called to synchronize the related objects in the context. Note, that the following APIs automatically trigger a **DetectChanges** call.
+If you are using POCO entities without proxies, you must make sure that the **DetectChanges** method is called to synchronize the related objects in the context. Note that the following APIs automatically trigger a **DetectChanges** call.
 
 -   `DbSet.Add`
 -   `DbSet.AddRange`
@@ -141,18 +143,18 @@ If you are using POCO entities without proxies, you must make sure that the **De
 
 ## Loading related objects
 
-In Entity Framework you commonly use navigation properties to load entities that are related to the returned entity by the defined association. For more information, see [Loading Related Objects](~/ef6/querying/related-data.md).
+In Entity Framework you commonly use navigation properties to load entities that are related to the returned entity by the defined association. For more information, see [Loading Related Objects](xref:ef6/querying/related-data).
 
 > [!NOTE]
 > In a foreign key association, when you load a related end of a dependent object, the related object will be loaded based on the foreign key value of the dependent that is currently in memory:
 
 ``` csharp
     // Get the course where currently DepartmentID = 2.
-    Course course2 = context.Courses.First(c=>c.DepartmentID == 2);
+    Course course = context.Courses.First(c => c.DepartmentID == 2);
 
     // Use DepartmentID foreign key property
     // to change the association.
-    course2.DepartmentID = 3;
+    course.DepartmentID = 3;
 
     // Load the related Department where DepartmentID = 3
     context.Entry(course).Reference(c => c.Department).Load();
@@ -166,7 +168,7 @@ In both foreign key and independent associations, concurrency checks are based o
 
 We recommend that you always use the foreign key association when working with entities that participate in concurrency checking and resolution.
 
-For more information, see [Handling Concurrency Conflicts](~/ef6/saving/concurrency.md).
+For more information, see [Handling Concurrency Conflicts](xref:ef6/saving/concurrency).
 
 ## Working with overlapping Keys
 

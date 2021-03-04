@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 6 Runtime Beta/RC License"
-ms.date: "10/23/2016"
-ms.assetid: db123990-8290-41c8-a41f-494d3f2994f7
+title: Entity Framework 6 Runtime Beta/RC License - EF6
+description: Entity Framework 6 Runtime Beta/RC License
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 6 Runtime Beta/RC License (ENU)
 **MICROSOFT PRE-RELEASE SOFTWARE LICENSE TERMS**
@@ -44,7 +45,7 @@ for this software, unless other terms accompany those items. If so, those terms 
 -   transfer the software or this agreement to any third party; or
 -   use the software for commercial software hosting services.
 
-**6.    EXPORT RESTRICTIONS.** The software is subject to United States export laws and regulations. You must comply with all domestic and international export laws and regulations that apply to the software. These laws include restrictions on destinations, end users and end use. For additional information, see www.microsoft.com/exporting.
+**6.    EXPORT RESTRICTIONS.** The software is subject to United States export laws and regulations. You must comply with all domestic and international export laws and regulations that apply to the software. These laws include restrictions on destinations, end users and end use. For additional information, see https://www.microsoft.com/exporting.
 
 **7.    SUPPORT SERVICES.** Because this software is “as is,” we may not provide support services for it.
 

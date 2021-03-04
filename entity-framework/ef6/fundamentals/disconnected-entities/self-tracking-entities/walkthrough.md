@@ -1,16 +1,17 @@
 ---
-title: "Self-Tracking Entities Walkthrough - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
+title: Self-Tracking Entities Walkthrough - EF6
+description: Self-tracking entities walkthrough for Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough
 ---
 # Self-Tracking Entities Walkthrough
 > [!IMPORTANT]
-> We no longer recommend using the self-tracking-entities template. It will only continue to be available to support existing applications. If your application requires working with disconnected graphs of entities, consider other alternatives such as [Trackable Entities](http://trackableentities.github.io/), which is a technology similar to Self-Tracking-Entities that is more actively developed by the community, or writing custom code using the low-level change tracking APIs.
+> We no longer recommend using the self-tracking-entities template. It will only continue to be available to support existing applications. If your application requires working with disconnected graphs of entities, consider other alternatives such as [Trackable Entities](https://trackableentities.github.io/), which is a technology similar to Self-Tracking-Entities that is more actively developed by the community, or writing custom code using the low-level change tracking APIs.
 
 This walkthrough demonstrates the scenario in which a Windows Communication Foundation (WCF) service exposes an operation that returns an entity graph. Next, a client application manipulates that graph and submits the modifications to a service operation that validates and saves the updates to a database using Entity Framework.
 
-Before completing this walkthrough make sure you read the [Self-Tracking Entities](index.md) page.
+Before completing this walkthrough make sure you read the [Self-Tracking Entities](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/index) page.
 
 This walkthrough completes the following actions:
 
@@ -398,7 +399,7 @@ You can now run the application to see it in action.
 
 You'll see the following output when the application executes.
 
-```
+```console
 Initial Data:
 ADO.NET Blog
 - Intro to EF

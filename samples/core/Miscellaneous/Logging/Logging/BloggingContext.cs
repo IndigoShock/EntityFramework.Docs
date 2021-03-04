@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 
 namespace EFLogging
 {
     public class BloggingContext : DbContext
     {
         #region DefineLoggerFactory
-        public static readonly LoggerFactory MyLoggerFactory
-            = new LoggerFactory(new[] {new ConsoleLoggerProvider((_, __) => true, true)});
+        public static readonly ILoggerFactory MyLoggerFactory
+            = LoggerFactory.Create(builder => { builder.AddConsole(); });
         #endregion
 
         public DbSet<Blog> Blogs { get; set; }
@@ -16,9 +16,54 @@ namespace EFLogging
         #region RegisterLoggerFactory
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
-                .UseLoggerFactory(MyLoggerFactory) // Warning: Do not create a new ILoggerFactory instance each time
-                .UseSqlServer(
-                    @"Server=(localdb)\mssqllocaldb;Database=EFLogging;Trusted_Connection=True;ConnectRetryCount=0");
+                .UseLoggerFactory(MyLoggerFactory)
+                .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFLogging;ConnectRetryCount=0");
+        #endregion
+    }
+
+    public class EnableSensitiveDataLoggingContext : BloggingContext
+    {
+        #region EnableSensitiveDataLogging
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.EnableSensitiveDataLogging();
+        #endregion
+    }
+
+    public class EnableDetailedErrorsContext : BloggingContext
+    {
+        #region EnableDetailedErrors
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.EnableDetailedErrors();
+        #endregion
+    }
+
+    public class ChangeLogLevelContext : BloggingContext
+    {
+        #region ChangeLogLevel
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder
+                .ConfigureWarnings(
+                    b => b.Log(
+                        (RelationalEventId.ConnectionOpened, LogLevel.Information),
+                        (RelationalEventId.ConnectionClosed, LogLevel.Information)));
+        #endregion
+    }
+
+    public class SuppressMessageContext : BloggingContext
+    {
+        #region SuppressMessage
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder
+                .ConfigureWarnings(b => b.Ignore(CoreEventId.DetachedLazyLoadingWarning));
+        #endregion
+    }
+
+    public class ThrowForEventContext : BloggingContext
+    {
+        #region ThrowForEvent
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder
+                .ConfigureWarnings(b => b.Throw(RelationalEventId.QueryPossibleUnintendedUseOfEqualsWarning));
         #endregion
     }
 }

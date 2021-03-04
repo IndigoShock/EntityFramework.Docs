@@ -1,8 +1,9 @@
 ---
-title: "Entity Framework Providers - EF6"
-author: divega
-ms.date: "06/27/2018"
-ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
+title: Entity Framework Providers - EF6
+description: Entity Framework Providers in Entity Framework 6
+author: ajcvickers
+ms.date: 06/27/2018
+uid: ef6/fundamentals/providers/index
 ---
 
 # Entity Framework 6 Providers
@@ -16,15 +17,15 @@ The Entity Framework is now being developed under an open-source license and EF6
 Providers we are aware of that have been rebuilt for EF6 include:
 
 *   **Microsoft SQL Server provider**
-    *   Built from the [Entity Framework open source code base](http://github.com/aspnet/EntityFramework6)
-    *   Shipped as part of the [EntityFramework NuGet package](http://nuget.org/packages/EntityFramework)
+    *   Built from the [Entity Framework open source code base](https://github.com/aspnet/EntityFramework6)
+    *   Shipped as part of the [EntityFramework NuGet package](https://nuget.org/packages/EntityFramework)
 *   **Microsoft SQL Server Compact Edition provider**
-    *   Built from the [Entity Framework open source code base](http://github.com/aspnet/EntityFramework6)
-    *   Shipped in the [EntityFramework.SqlServerCompact NuGet package](http://nuget.org/packages/EntityFramework.SqlServerCompact)
-*   [**Devart dotConnect Data Providers**](http://www.devart.com/dotconnect/)
-    *   There are third-party providers from [Devart](http://www.devart.com/) for a variety of databases including Oracle, MySQL, PostgreSQL, SQLite, Salesforce, DB2, and SQL Server
-*   [**CData Software providers**](http://www.cdata.com/ado/)
-    *   There are third-party providers from [CData Software](http://www.cdata.com/ado/) for a variety of data stores including Salesforce, Azure Table Storage, MySql, and many more
+    *   Built from the [Entity Framework open source code base](https://github.com/aspnet/EntityFramework6)
+    *   Shipped in the [EntityFramework.SqlServerCompact NuGet package](https://nuget.org/packages/EntityFramework.SqlServerCompact)
+*   [**Devart dotConnect Data Providers**](https://www.devart.com/dotconnect/)
+    *   There are third-party providers from [Devart](https://www.devart.com/) for a variety of databases including Oracle, MySQL, PostgreSQL, SQLite, Salesforce, DB2, and SQL Server
+*   [**CData Software providers**](https://www.cdata.com/ado/)
+    *   There are third-party providers from [CData Software](https://www.cdata.com/ado/) for a variety of data stores including Salesforce, Azure Table Storage, MySql, and many more
 *   **Firebird provider**
     *   Available as a [NuGet Package](https://www.nuget.org/packages/EntityFramework.Firebird/)
 *   **Visual Fox Pro provider**
@@ -35,6 +36,8 @@ Providers we are aware of that have been rebuilt for EF6 include:
     *   Npgsql is available as a [NuGet package](https://www.nuget.org/packages/EntityFramework6.Npgsql/)
 *   **Oracle**
     *   ODP.NET is available as a [NuGet package](https://www.nuget.org/packages/Oracle.ManagedDataAccess.EntityFramework/)
+*   **SQLite**
+    *   System.Data.SQLite is available as a [NuGet package](https://www.nuget.org/packages/System.Data.SQLite/)
 
 Note that inclusion in this list does not indicate the level of functionality or support for a given provider, only that a build for EF6 has been made available.
 
@@ -81,7 +84,7 @@ In this code “SqlCeProviderServices.ProviderInvariantName” is a convenience 
 
 ## What if the provider I need isn’t available?
 
-If the provider is available for previous versions of EF, then we encourage you to contact the owner of the provider and ask them to create an EF6 version. You should include a reference to the [documentation for the EF6 provider model](~/ef6/fundamentals/providers/provider-model.md).
+If the provider is available for previous versions of EF, then we encourage you to contact the owner of the provider and ask them to create an EF6 version. You should include a reference to the [documentation for the EF6 provider model](xref:ef6/fundamentals/providers/provider-model).
 
 ## Can I write a provider myself?
 

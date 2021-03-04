@@ -1,8 +1,8 @@
 ---
-title: "Entity Framework Blogs - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: f8fcfb34-35de-4e82-b419-8f99fd2eb92a
+title: Entity Framework Blogs - EF6
+description: Entity Framework 6 Blogs
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework Blogs
 Besides the product documentation, these blogs can be a source of useful information on Entity Framework:
@@ -15,15 +15,15 @@ Besides the product documentation, these blogs can be a source of useful informa
 
 ## Current and former EF team bloggers
 
-- [Arthur Vickers](https://blog.oneunicorn.com/tag/entity-framework/)
-- [Brice Lambson](http://www.bricelam.net/)
+- [Arthur Vickers](https://blog.oneunicorn.com/)
+- [Brice Lambson](https://www.bricelam.net/)
 - [Diego Vega](https://blogs.msdn.microsoft.com/diego/)
 - [Rowan Miller](https://romiller.com/category/entity-framework/)
 - [Pawel Kadluczka](https://blog.3d-logic.com/category/entity-framework/)
-- [Alex James](https://blogs.msdn.microsoft.com/alexj/tag/entity-framework/)
-- [Zlatko Michailov](https://blogs.msdn.microsoft.com/esql/tag/entity-framework/)
+- [Alex James](https://blogs.msdn.microsoft.com/alexj/)
+- [Zlatko Michailov](https://blogs.msdn.microsoft.com/esql/)
 
 ## EF Community Bloggers
 
-- [Julie Lerman](http://thedatafarm.com/blog/)  
+- [Julie Lerman](https://thedatafarm.com/blog/)  
 - [Shawn Wildermuth](https://wildermuth.com/Tag/%20Entity%20Framework)  

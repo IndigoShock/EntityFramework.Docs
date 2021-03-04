@@ -1,8 +1,9 @@
 ---
-title: "Local Data - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: 2eda668b-1e5d-487d-9a8c-0e3beef03fcb
+title: Local Data - EF6
+description: Local Data in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/querying/local-data
 ---
 # Local Data
 Running a LINQ query directly against a DbSet will always send a query to the database, but you can access the data that is currently in-memory using the DbSet.Local property. You can also access the extra information EF is tracking about your entities using the DbContext.Entry and DbContext.ChangeTracker.Entries methods. The techniques shown in this topic apply equally to models created with Code First and the EF Designer.  
@@ -49,7 +50,7 @@ using (var context = new BloggingContext())
 
 If we had two blogs in the database - 'ADO.NET Blog' with a BlogId of 1 and 'The Visual Studio Blog' with a BlogId of 2 - we could expect the following output:  
 
-```  
+```console
 In Local:
 Found 0: My New Blog with state Added
 Found 2: The Visual Studio Blog with state Unchanged
@@ -73,7 +74,7 @@ The Local property on DbSet returns an [ObservableCollection](https://msdn.micro
 using (var context = new BloggingContext())
 {
     // Load some posts from the database into the context
-    context.Posts.Where(p => p.Tags.Contains("entity-framework").Load();  
+    context.Posts.Where(p => p.Tags.Contains("entity-framework")).Load();  
 
     // Get the local collection and make some changes to it
     var localPosts = context.Posts.Local;
@@ -115,7 +116,7 @@ using (var context = new BloggingContext())
 
 Assuming we had a few posts tagged with 'entity-framework' and 'asp.net' the output may look something like this:  
 
-```  
+```console
 In Local after entity-framework query:
 Found 3: EF Designer Basics with state Unchanged
 Found 5: EF Code First Basics with state Unchanged
@@ -292,7 +293,7 @@ Reader with ReaderId = 1 and Name = 'John Doe'
 
 The output from running the code would be:  
 
-```  
+```console
 All tracked entities:
 Found entity of type Blog with state Modified
 Found entity of type Blog with state Deleted

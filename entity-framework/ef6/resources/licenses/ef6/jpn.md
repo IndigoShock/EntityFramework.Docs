@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 6 Runtime License (JPN)"
-ms.date: "10/23/2016"
-ms.assetid: 8ecaca70-5ba7-4ef8-9540-1a98a57eeb22
+title: Entity Framework 6 Runtime License (JPN) - EF6
+description: Entity Framework 6 Runtime License (JPN)
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 6 Runtime License (JPN)
 **マイクロソフト ソフトウェア ライセンス条項**
@@ -54,7 +55,7 @@ ms.assetid: 8ecaca70-5ba7-4ef8-9540-1a98a57eeb22
 
 **4.    ドキュメンテーション。**お客様のコンピューターまたは内部ネットワークに有効なアクセス権を有する者は、お客様の内部使用目的に限り、ドキュメントを複製して使用することができます。
 
-**5.    輸出規制。**本ソフトウェアは米国および日本国の輸出に関する規制の対象となります。お客様は、本ソフトウェアに適用されるすべての国内法および国際法 (輸出対象国、エンド ユーザーおよびエンド ユーザーによる使用に関する制限を含みます) を遵守しなければなりません。詳細については www.microsoft.com/japan/exporting をご参照ください。
+**5.    輸出規制。**本ソフトウェアは米国および日本国の輸出に関する規制の対象となります。お客様は、本ソフトウェアに適用されるすべての国内法および国際法 (輸出対象国、エンド ユーザーおよびエンド ユーザーによる使用に関する制限を含みます) を遵守しなければなりません。詳細については https://www.microsoft.com/ja-jp/exporting/ をご参照ください。
 
 **6.    サポート サービス。**本ソフトウェアは現状有姿で提供されます。そのため、マイクロソフトはサポート サービスを提供しない場合があります。
 

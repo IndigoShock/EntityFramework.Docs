@@ -1,41 +1,35 @@
 ---
 title: Microsoft SQL Server Database Provider - EF Core
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 2e007c82-c6e4-45bb-8129-851b79ec1a0a
+description: Documentation for the database provider that allows Entity Framework Core to be used with Microsoft SQL Server
+author: AndriySvyryd
+ms.date: 11/05/2019
 uid: core/providers/sql-server/index
 ---
 # Microsoft SQL Server EF Core Database Provider
 
-This database provider allows Entity Framework Core to be used with Microsoft SQL Server (including SQL Azure). The provider is maintained as part of the [Entity Framework Core Project](https://github.com/aspnet/EntityFrameworkCore).
+This database provider allows Entity Framework Core to be used with Microsoft SQL Server (including Azure SQL Database). The provider is maintained as part of the [Entity Framework Core Project](https://github.com/dotnet/efcore).
 
 ## Install
 
 Install the [Microsoft.EntityFrameworkCore.SqlServer NuGet package](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/).
 
-``` powershell
+### [.NET Core CLI](#tab/dotnet-core-cli)
+
+```dotnetcli
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+```
+
+### [Visual Studio](#tab/vs)
+
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-## Get Started
+***
 
-The following resources will help you get started with this provider.
-* [Getting Started on .NET Framework (Console, WinForms, WPF, etc.)](../../get-started/full-dotnet/index.md)
-
-* [Getting Started on ASP.NET Core](../../get-started/aspnetcore/index.md)
-
-* [UnicornStore Sample Application](https://github.com/rowanmiller/UnicornStore/tree/master/UnicornStore)
+> [!NOTE]
+> Since version 3.0.0, the provider references Microsoft.Data.SqlClient (previous versions depended on System.Data.SqlClient). If your project takes a direct dependency on SqlClient, make sure it references the Microsoft.Data.SqlClient package.
 
 ## Supported Database Engines
 
-* Microsoft SQL Server (2008 onwards)
-
-## Supported Platforms
-
-* .NET Framework (4.5.1 onwards)
-
-* .NET Core
-
-* Mono (4.2.0 onwards)
-
-      Caution: Using this provider on Mono will make use of the Mono SQL Client implementation, which has a number of known issues. For example, it does not support secure connections (SSL).
+* Microsoft SQL Server (2012 onwards)

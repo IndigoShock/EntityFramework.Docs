@@ -1,14 +1,13 @@
-﻿using BusinessLogic;
+﻿using System.Linq;
+using BusinessLogic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
+using Xunit;
 
-namespace TestProject.InMemory
+namespace EFTesting.TestProject.InMemory
 {
-    [TestClass]
     public class BlogServiceTests
     {
-        [TestMethod]
+        [Fact]
         public void Add_writes_to_database()
         {
             var options = new DbContextOptionsBuilder<BloggingContext>()
@@ -16,22 +15,22 @@ namespace TestProject.InMemory
                 .Options;
 
             // Run the test against one instance of the context
-            using (var context = new BloggingContext(options))
+            using (var context = CreateContext(options))
             {
                 var service = new BlogService(context);
-                service.Add("http://sample.com");
+                service.Add("https://example.com");
                 context.SaveChanges();
             }
 
             // Use a separate instance of the context to verify correct data was saved to database
-            using (var context = new BloggingContext(options))
+            using (var context = CreateContext(options))
             {
-                Assert.AreEqual(1, context.Blogs.Count());
-                Assert.AreEqual("http://sample.com", context.Blogs.Single().Url);
+                Assert.Equal(1, context.Blogs.Count());
+                Assert.Equal("https://example.com", context.Blogs.Single().Url);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void Find_searches_url()
         {
             var options = new DbContextOptionsBuilder<BloggingContext>()
@@ -39,21 +38,54 @@ namespace TestProject.InMemory
                 .Options;
 
             // Insert seed data into the database using one instance of the context
-            using (var context = new BloggingContext(options))
+            using (var context = CreateContext(options))
             {
-                context.Blogs.Add(new Blog { Url = "http://sample.com/cats" });
-                context.Blogs.Add(new Blog { Url = "http://sample.com/catfish" });
-                context.Blogs.Add(new Blog { Url = "http://sample.com/dogs" });
+                context.Blogs.Add(new Blog { Url = "https://example.com/cats" });
+                context.Blogs.Add(new Blog { Url = "https://example.com/catfish" });
+                context.Blogs.Add(new Blog { Url = "https://example.com/dogs" });
                 context.SaveChanges();
             }
 
             // Use a clean instance of the context to run the test
-            using (var context = new BloggingContext(options))
+            using (var context = CreateContext(options))
             {
                 var service = new BlogService(context);
                 var result = service.Find("cat");
-                Assert.AreEqual(2, result.Count());
+                Assert.Equal(2, result.Count());
             }
         }
+
+        [Fact]
+        public void GetAllResources_returns_all_resources()
+        {
+            var options = new DbContextOptionsBuilder<BloggingContext>()
+                .UseInMemoryDatabase(databaseName: "GetAllResources_returns_all_resources")
+                .Options;
+
+            // Insert seed data into the database using one instance of the context
+            using (var context = CreateContext(options))
+            {
+                context.Blogs.Add(new Blog { Url = "https://example.com/cats" });
+                context.Blogs.Add(new Blog { Url = "https://example.com/catfish" });
+                context.Blogs.Add(new Blog { Url = "https://example.com/dogs" });
+                context.SaveChanges();
+            }
+
+            // Use a clean instance of the context to run the test
+            using (var context = CreateContext(options))
+            {
+                var service = new BlogService(context);
+                var result = service.GetAllResources();
+                Assert.Equal(3, result.Count());
+            }
+        }
+
+        private static BloggingContext CreateContext(DbContextOptions<BloggingContext> options)
+            => new BloggingContext(
+                options, (context, modelBuilder) =>
+                {
+                    modelBuilder.Entity<UrlResource>()
+                        .ToInMemoryQuery(() => context.Blogs.Select(b => new UrlResource { Url = b.Url }));
+                });
     }
 }

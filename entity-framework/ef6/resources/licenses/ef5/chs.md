@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 5 License (CHS)"
-ms.date: "10/23/2016"
-ms.assetid: 72b83f2c-d892-4181-bc6a-290688d3d3f2
+title: Entity Framework 5 License (CHS) - EF6
+description: Entity Framework 5 License (CHS)
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 5 License (CHS)
 **MICROSOFT 软件补充程序许可条款**
@@ -42,4 +43,4 @@ c. **分发限制。您不可以**
     -   以源代码形式披露或分发代码；或
     -   其他人有权对其进行修改。
 
-2. **对补充程序的支持服务。**Microsoft 为 www.support.microsoft.com/common/international.aspx 中指明的本软件提供支持服务。
+2. **对补充程序的支持服务。**Microsoft 为 https://www.support.microsoft.com/common/international.aspx 中指明的本软件提供支持服务。

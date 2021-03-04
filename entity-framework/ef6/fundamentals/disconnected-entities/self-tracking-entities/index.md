@@ -1,13 +1,14 @@
 ---
-title: "Self-tracking entities - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
+title: Self-tracking entities - EF6
+description: Self-tracking entities in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/index
 ---
 # Self-tracking entities
 
 > [!IMPORTANT]
-> We no longer recommend using the self-tracking-entities template. It will only continue to be available to support existing applications. If your application requires working with disconnected graphs of entities, consider other alternatives such as [Trackable Entities](http://trackableentities.github.io/), which is a technology similar to Self-Tracking-Entities that is more actively developed by the community, or writing custom code using the low-level change tracking APIs.
+> We no longer recommend using the self-tracking-entities template. It will only continue to be available to support existing applications. If your application requires working with disconnected graphs of entities, consider other alternatives such as [Trackable Entities](https://trackableentities.github.io/), which is a technology similar to Self-Tracking-Entities that is more actively developed by the community, or writing custom code using the low-level change tracking APIs.
 
 In an Entity Framework-based application, a context is responsible for tracking changes in your objects. You then use the SaveChanges method to persist the changes to the database. When working with N-Tier applications, the entity objects are usually disconnected from the context and you must decide how to track changes and report those changes back to the context. Self-Tracking Entities (STEs) can help you track changes in any tier and then replay these changes into a context to be saved.  
 
@@ -20,11 +21,11 @@ This template item generates two .tt (text template) files:
 
 ## Get Started  
 
-To get started, visit the [Self-Tracking Entities Walkthrough](walkthrough.md) page.  
+To get started, visit the [Self-Tracking Entities Walkthrough](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough) page.  
 
 ## Functional Considerations When Working with Self-Tracking Entities  
 > [!IMPORTANT]
-> We no longer recommend using the self-tracking-entities template. It will only continue to be available to support existing applications. If your application requires working with disconnected graphs of entities, consider other alternatives such as [Trackable Entities](http://trackableentities.github.io/), which is a technology similar to Self-Tracking-Entities that is more actively developed by the community, or writing custom code using the low-level change tracking APIs.
+> We no longer recommend using the self-tracking-entities template. It will only continue to be available to support existing applications. If your application requires working with disconnected graphs of entities, consider other alternatives such as [Trackable Entities](https://trackableentities.github.io/), which is a technology similar to Self-Tracking-Entities that is more actively developed by the community, or writing custom code using the low-level change tracking APIs.
 
 Consider the following when working with self-tracking entities:  
 

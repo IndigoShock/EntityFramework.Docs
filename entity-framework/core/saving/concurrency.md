@@ -1,6 +1,7 @@
 ---
 title: Handling Concurrency Conflicts - EF Core
-author: rowanmiller
+description: Managing conflicts when the same data is updated concurrently with Entity Framework Core
+author: ajcvickers
 ms.date: 03/03/2018
 uid: core/saving/concurrency
 ---
@@ -10,7 +11,7 @@ uid: core/saving/concurrency
 > This page documents how concurrency works in EF Core and how to handle concurrency conflicts in your application. See [Concurrency Tokens](xref:core/modeling/concurrency) for details on how to configure concurrency tokens in your model.
 
 > [!TIP]
-> You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Concurrency/) on GitHub.
+> You can view this article's [sample](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Concurrency/) on GitHub.
 
 _Database concurrency_ refers to situations in which multiple processes or users access or change the same data in a database at the same time. _Concurrency control_ refers to specific mechanisms used to ensure data consistency in presence of concurrent changes.
 
@@ -33,7 +34,7 @@ If no rows are affected, a concurrency conflict is detected, and EF Core throws 
 
 For example, we may want to configure `LastName` on `Person` to be a concurrency token. Then any update operation on Person will include the concurrency check in the `WHERE` clause:
 
-``` sql
+```sql
 UPDATE [Person] SET [FirstName] = @p1
 WHERE [PersonId] = @p0 AND [LastName] = @p2;
 ```
@@ -50,11 +51,9 @@ Resolving a concurrency conflict involves merging the pending changes from the c
 
 **There are three sets of values available to help resolve a concurrency conflict:**
 
-* **Current values** are the values that the application was attempting to write to the database.
-
-* **Original values** are the values that were originally retrieved from the database, before any edits were made.
-
-* **Database values** are the values currently stored in the database.
+- **Current values** are the values that the application was attempting to write to the database.
+- **Original values** are the values that were originally retrieved from the database, before any edits were made.
+- **Database values** are the values currently stored in the database.
 
 The general approach to handle a concurrency conflicts is:
 
@@ -63,6 +62,6 @@ The general approach to handle a concurrency conflicts is:
 3. Refresh the original values of the concurrency token to reflect the current values in the database.
 4. Retry the process until no conflicts occur.
 
-In the following example, `Person.FirstName` and `Person.LastName` are setup as concurrency tokens. There is a `// TODO:` comment in the location where you include application specific logic to choose the value to be saved.
+In the following example, `Person.FirstName` and `Person.LastName` are set up as concurrency tokens. There is a `// TODO:` comment in the location where you include application specific logic to choose the value to be saved.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=34-35)]
+[!code-csharp[Main](../../../samples/core/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=33-34)]

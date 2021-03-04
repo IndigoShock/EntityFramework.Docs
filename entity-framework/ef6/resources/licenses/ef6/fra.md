@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 6 Runtime License (FRA)"
-ms.date: "10/23/2016"
-ms.assetid: b7066d9f-8b86-4218-9463-57665f391aaa
+title: Entity Framework 6 Runtime License (FRA) - EF6
+description: Entity Framework 6 Runtime License (FRA)
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 6 Runtime License (FRA)
 **TERMES DU CONTRAT DE LICENCE LOGICIEL MICROSOFT**
@@ -54,7 +55,7 @@ de ce logiciel à moins que d’autres termes n’accompagnent ces produits, auq
 
 **4.    DOCUMENTATION.** Tout utilisateur disposant d’un accès valable à votre ordinateur ou à votre réseau interne est autorisé à copier et à utiliser la documentation à titre de référence et à des fins internes.
 
-**5.    RESTRICTIONS À L’EXPORTATION.** Le logiciel est soumis aux lois et réglementations américaines en matière d’exportation. Vous devez vous conformer à toutes les lois et réglementations nationales et internationales en matière d’exportation concernant le logiciel. Ces lois comportent des restrictions sur les utilisateurs finaux et les utilisations finales. Des informations supplémentaires sont disponibles sur le site www.microsoft.com/exporting.
+**5.    RESTRICTIONS À L’EXPORTATION.** Le logiciel est soumis aux lois et réglementations américaines en matière d’exportation. Vous devez vous conformer à toutes les lois et réglementations nationales et internationales en matière d’exportation concernant le logiciel. Ces lois comportent des restrictions sur les utilisateurs finaux et les utilisations finales. Des informations supplémentaires sont disponibles sur le site https://www.microsoft.com/exporting.
 
 **6.    SERVICES D’ASSISTANCE TECHNIQUE.** Ce logiciel étant fourni « en l’état », nous ne fournirons aucun service d’assistance technique.
 

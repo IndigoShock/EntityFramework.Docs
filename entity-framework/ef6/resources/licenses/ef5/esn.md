@@ -1,7 +1,8 @@
 ---
-title: "Entity Framework 5 License (ESN)"
-ms.date: "10/23/2016"
-ms.assetid: 637cccbb-5418-4562-8187-02f644f4c091
+title: Entity Framework 5 License (ESN) - EF6
+description: Entity Framework 5 License (ESN)
+author: ajcvickers
+ms.date: 10/23/2016
 ---
 # Entity Framework 5 License (ESN)
 **TÉRMINOS SUPLEMENTARIOS A LA LICENCIA DE USO DE SOFTWARE DE MICROSOFT**
@@ -42,4 +43,4 @@ Los siguientes términos de licencia describen términos de uso adicionales para
     -   el código sea divulgado o distribuido en forma de código fuente, o que
     -   otros tengan derecho a modificarlo.
 
-**2. SERVICIOS DE SOPORTE TÉCNICO PARA SUPLEMENTOS.** Microsoft presta servicios de soporte técnico para este software, tal y como se describe en www.support.microsoft.com/common/international.aspx.
+**2. SERVICIOS DE SOPORTE TÉCNICO PARA SUPLEMENTOS.** Microsoft presta servicios de soporte técnico para este software, tal y como se describe en https://www.support.microsoft.com/common/international.aspx.

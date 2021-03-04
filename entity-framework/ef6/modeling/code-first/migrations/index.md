@@ -1,8 +1,9 @@
 ---
-title: "Code First Migrations - EF6"
-author: divega
-ms.date: "10/23/2016"
-ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
+title: Code First Migrations - EF6
+description: Code First Migrations in Entity Framework 6
+author: ajcvickers
+ms.date: 10/23/2016
+uid: ef6/modeling/code-first/migrations/index
 ---
 # Code First Migrations
 Code First Migrations is the recommended way to evolve your application's database schema if you are using the Code First workflow. Migrations provide a set of tools that allow:
@@ -11,7 +12,7 @@ Code First Migrations is the recommended way to evolve your application's databa
 2. Generating migrations to keep track of changes you make to your EF model
 2. Keep your database up to date with those changes
 
-The following walkthrough will provide an overview Code First Migrations in Entity Framework. You can either complete the entire walkthrough or skip to the topic you are interested in. The following topics are covered:
+The following walkthrough will provide an overview of Code First Migrations in Entity Framework. You can either complete the entire walkthrough or skip to the topic you are interested in. The following topics are covered:
 
 ## Building an Initial Model & Database
 
